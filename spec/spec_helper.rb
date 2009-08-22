@@ -1,9 +1,16 @@
+require File.expand_path(File.join(File.dirname(__FILE__), "..", "init"))
+
 require 'rubygems'
 require 'sinatra'
 require 'spec'
-require 'spec/interop/test'
 require 'rack/test'
 require 'webrat'
+
+Webrat.configure do |config|
+  config.mode = :rack_test
+  config.application_framework = :sinatra
+  config.application_port = 4567
+end
 
 # set test environment
 Sinatra::Base.set :environment, :test
