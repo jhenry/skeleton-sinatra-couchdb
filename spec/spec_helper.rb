@@ -3,11 +3,12 @@ require File.expand_path(File.join(File.dirname(__FILE__), "..", "init"))
 require 'rubygems'
 require 'sinatra'
 require 'spec'
-require 'rack/test'
 require 'webrat'
+require 'rack/test'
+
 
 Webrat.configure do |config|
-  config.mode = :rack_test
+  config.mode = :rack
   config.application_framework = :sinatra
   config.application_port = 4567
 end
@@ -18,12 +19,13 @@ Sinatra::Base.set :run, false
 Sinatra::Base.set :raise_errors, true
 Sinatra::Base.set :logging, false
 
-require 'application'
-
 Spec::Runner.configure do |config|
   
   def app
-    Main.new
+    Rack::Builder.app do
+      use Rack::Session::Cookie
+      Main.new
+    end
   end
   
   config.include(Rack::Test::Methods)
