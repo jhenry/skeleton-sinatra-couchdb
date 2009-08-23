@@ -6,7 +6,7 @@ Feature: Viewing the home page
   Scenario: Display home page with a message.
     Given I am a visitor
     When I go to the homepage
-    Then I should see "Hello World"
+    Then I should see "Hello, world!"
   
   
   
