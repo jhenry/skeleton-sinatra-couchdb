@@ -115,8 +115,10 @@ module Rack
 
       def merge(raw_cookies, uri = nil)
         return unless raw_cookies
-
-        Array(raw_cookies).join("\n").split("\n").each do |raw_cookie|
+        
+        # patch http://github.com/KeithHanson/rack-test/commit/232d186c3a60a083c11162095d32a79d69195785
+        Array(raw_cookies).each do |raw_cookie|
+          raw_cookie.chomp!
           cookie = Cookie.new(raw_cookie, uri, @default_host)
           self << cookie if cookie.valid?(uri)
         end
