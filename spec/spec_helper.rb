@@ -1,3 +1,4 @@
+ENV['RACK_ENV'] = 'test'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "init"))
 
 require 'rubygems'
@@ -14,18 +15,19 @@ Webrat.configure do |config|
 end
 
 # set test environment
-Sinatra::Base.set :environment, :test
-Sinatra::Base.set :run, false
-Sinatra::Base.set :raise_errors, true
-Sinatra::Base.set :logging, false
+# Sinatra::Base.set :environment, :test
+# Sinatra::Base.set :run, false
+# Sinatra::Base.set :raise_errors, true
+# Sinatra::Base.set :logging, false
 
 Spec::Runner.configure do |config|
   
   def app
-    Rack::Builder.app do
-      use Rack::Session::Cookie
       Main.new
-    end
+      Main.set :environment, :test
+      Main.set :run, false
+      Main.set :raise_errors, true
+      Main.set :logging, false
   end
   
   config.include(Rack::Test::Methods)
