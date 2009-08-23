@@ -5,7 +5,7 @@ describe 'main application' do
   it "shows the default index page" do
     get '/'
     last_response.should be_ok
-    last_response.body[0].should have_tag('title', /#{SiteConfig.title}/)
+    last_response.should contain(SiteConfig.title)
   end
   
 end
