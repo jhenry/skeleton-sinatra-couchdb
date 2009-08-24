@@ -1,0 +1,3 @@
+This is a scraggly monk skeleton set up to use couchdb, cucumber, and rspec style rack-tests (including webrat matchers).  See [http://monkrb.com](http://monkrb.com) for more about monk and skeletons.
+
+Many of the core bones in this skeleton are based on settings found in [zapnap](http://blog.zerosum.org/ "zerosum dirt(nap)")'s niftaculous [sinatra application template](http://github.com/zapnap/retweet/tree/couchdb "zapnap's retweet at couchdb - GitHub").
