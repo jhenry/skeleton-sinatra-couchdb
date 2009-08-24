@@ -1,6 +1,6 @@
 desc 'Default task: run all tests'
-task :default => [:test]
+task :default => [:spec]
 
-task :test do
-  exec "thor monk:test"
+task :spec do
+  exec "thor monk:spec"
 end
