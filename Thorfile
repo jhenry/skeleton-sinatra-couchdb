@@ -2,23 +2,16 @@ class Monk < Thor
   namespace :monk
 
   include Thor::Actions
-
-  desc "test", "Run all the tests"
-  def test
-    verify "config/settings.example.yml"
-    verify "config/redis/test.example.conf"
-
-    $:.unshift File.join(File.dirname(__FILE__), "test")
-
-    Dir['test/**/*_test.rb'].each do |file|
-      load file unless file =~ /^-/
+  
+  desc "spec", "Run all the specs"
+  def spec
+    Dir['spec/**/*_spec.rb'].each do |file|
+      exec "spec -c #{file}" unless file =~ /^-/
     end
   end
 
   desc "start ENV", "Start Monk in the supplied environment"
   def start(env = ENV["RACK_ENV"] || "development")
-    verify "config/settings.example.yml"
-    verify "config/redis/#{env}.example.conf"
     exec "env RACK_ENV=#{env} ruby init.rb"
   end
 
